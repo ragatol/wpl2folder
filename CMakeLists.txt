@@ -26,8 +26,10 @@ add_executable(wpl2folder main.cpp)
 # sets NDEBUG macro if CMAKE_BUILD_TYPE is set to Debug (for assert and others)
 target_compile_definitions(wpl2folder PRIVATE $<$<CONFIG:Debug>:NDEBUG>)
 
-# uncomment following line to compile with pt-br messages
-#target_compile_definitions(wpl2folder PRIVATE LANG_PTBR)
+# add -DLANG_PTBR=1 to build the brazilian portuguese version
+if(DEFINED LANG_PTBR)
+	target_compile_definitions(wpl2folder PRIVATE LANG_PTBR)
+endif()
 
 # link required libraries
 target_link_libraries(wpl2folder PRIVATE fmt::fmt)

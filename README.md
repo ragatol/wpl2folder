@@ -39,6 +39,12 @@ Create the build folder with:
 
 `cmake -B build -S .`
 
+for English version, or
+
+`cmake -B build -S . -DLANG_PTBR=1`
+
+for the Portuguese (Brazil) version.
+
 You can add `-DCMAKE_BUILD_TYPE=Debug` for a Debug build, or
 `-DCMAKE_BUILD_TYPE=Release` for a Release build on Linux.
 
@@ -108,6 +114,12 @@ onde está na sua instalação do cmake em `CMakeLists.txt`.
 Então crie a pasta de build com:
 
 `cmake -B build -S .`
+
+para a versão em Inglês, ou:
+
+`cmake -B build -S . -DLANG_PTBR=1`
+
+para a versão em Português (Brasil).
 
 Você pode adicionar `-DCMAKE_BUILD_TYPE=Debug` para uma build Debug ou
 `-DCMAKE_BUILD_TYPE=Release` pra uma build Release no Linux.
