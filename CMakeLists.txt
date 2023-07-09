@@ -8,9 +8,6 @@ project(wpl2folder VERSION 0.1
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Path to the vcpkg.cmake file
-include(~/.local/vcpkg/scripts/buildsystems/vcpkg.cmake)
-
 # Configure paths for the required libraries
 find_package(fmt CONFIG REQUIRED)
 find_package(nowide CONFIG REQUIRED)

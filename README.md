@@ -32,23 +32,20 @@ Libraries used:
 
 ## Building
 
-To build, first change the path to `vcpkg.cmake` file to your installation of
-vcpkg in `CMakeLists.txt`.
-
 Create the build folder with:
 
-`cmake -B build -S .`
+`cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=<path_to_vcpkg>/scripts/buildsystems/vcpkg.cmake`
 
 for English version, or
 
-`cmake -B build -S . -DLANG_PTBR=1`
+`cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=<path_to_vcpkg>/scripts/buildsystems/vcpkg.cmake -DLANG_PTBR=1`
 
 for the Portuguese (Brazil) version.
 
 You can add `-DCMAKE_BUILD_TYPE=Debug` for a Debug build, or
 `-DCMAKE_BUILD_TYPE=Release` for a Release build on Linux.
 
-On Linux, build the application with:
+Build the application with:
 
 `cmake --build build`
 
@@ -108,23 +105,20 @@ Libraries used:
 
 ## Compilando
 
-Para compilar, primeiramente mude o caminho para o arquivo `vcpkg.cmake` para
-onde está na sua instalação do cmake em `CMakeLists.txt`.
+Crie a pasta de build com:
 
-Então crie a pasta de build com:
-
-`cmake -B build -S .`
+`cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=<path_to_vcpkg>/scripts/buildsystems/vcpkg.cmake`
 
 para a versão em Inglês, ou:
 
-`cmake -B build -S . -DLANG_PTBR=1`
+`cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=<path_to_vcpkg>/scripts/buildsystems/vcpkg.cmake -DLANG_PTBR=1`
 
 para a versão em Português (Brasil).
 
 Você pode adicionar `-DCMAKE_BUILD_TYPE=Debug` para uma build Debug ou
 `-DCMAKE_BUILD_TYPE=Release` pra uma build Release no Linux.
 
-No Linux, compile a aplicação com:
+Compile a aplicação com:
 
 `cmake --build build`
 
