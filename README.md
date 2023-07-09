@@ -12,33 +12,47 @@ need to convert all media, videos included, to mp3. Not only that,
 but normalizing the volume is important so there's no need to make
 volume adjustments every time another music plays.
 
-## Usage
+## Dependencies
 
-Dependencies:
+Applications installed and found via PATH environment variable:
 
-- ffmpeg and bs1170gain installed and found via PATH environment variable.
+- ffmpeg
+- bs1770gain
 - cmake 3.12+
-- vcpkg, to automatically install:
-    - [fmt](https://github.com/fmtlib/fmt)
-    - [portable-file-diagogs](https://github.com/samhocevar/portable-file-dialogs)
+- vcpkg
 
 A vcpkg.json file is included and used with vcpkg configured in CMakeLists.txt
-so libraries dependencies are installed before building. ffmpeg and bs1170gain
-must be installed manually.
+so libraries dependencies are installed before building.
+
+Libraries used:
+
+- [fmt](https://github.com/fmtlib/fmt)
+- [nowide](https://github.com/boostorg/nowide)
+- [portable-file-diagogs](https://github.com/samhocevar/portable-file-dialogs)
+
+## Building
 
 To build, first change the path to `vcpkg.cmake` file to your installation of
-vcpkg in the `CMakeLists.txt` file and then run on your cli:
+vcpkg in `CMakeLists.txt`.
+
+Create the build folder with:
 
 `cmake -B build -S .`
 
-You can add `-D CMAKE_BUILD_TYPE=Debug` for a Debug build, or
-`-D CMAKE_BUILD_TYPE=Release` for a Release build.
+You can add `-DCMAKE_BUILD_TYPE=Debug` for a Debug build, or
+`-DCMAKE_BUILD_TYPE=Release` for a Release build on Linux.
 
-Finally, build with:
+On Linux, build the application with:
 
 `cmake --build build`
 
-The application will be inside the build folder.
+The application will be in the build folder.
+
+On Windows, open the *.sln file inside the build folder with Visual Studio,
+select the build type (Debug or Release) and compile the solution. The
+application will be inside the respective folder (Debug or Release).
+
+## Usage:
 
 Command line usage:
 
@@ -68,35 +82,47 @@ nomeados de acordo a manter sua ordem na playlist. O volume dos arquivos também
 são normalizados para que ele não precise ajustar o volume da mesa toda vez que
 uma música diferente é tocada.
 
-## Uso
+## Dependências
 
-Dependencias:
+Aplicativos instalados e encontrados via variável de ambiente PATH:
 
-- ffmpeg and bs1170gain instalados e com entradas na variável de ambiente PATH
+- ffmpeg
+- bs1770gain
 - cmake 3.12+
-- vcpkg, para instalar automaticamente:
-    - [fmt](https://github.com/fmtlib/fmt)
-    - [portable-file-diagogs](https://github.com/samhocevar/portable-file-dialogs)
+- vcpkg
 
-Um arquivo vcpkg.json está incluso e é utilizado com vcpkg configurado em
-CMakeLists.txt para que as dependências de bibliotecas sejam instaladas antes
-da compilação. ffmpeg e bs1170gain devem ser instalados e configurados
-manualmente.
+Um arquivo vcpkg.json está incluso para instalar as bibliotecas necessárias
+antes da compilação.
 
-Para compilar, primeiramente ajuste o caminho para o arquivo `vcpkg.cmake` da
-sua instalação do vcpkg no arquivo `CMakeLists.txt`. Depois execute numa linha
-de comando:
+Libraries used:
+
+- [fmt](https://github.com/fmtlib/fmt)
+- [nowide](https://github.com/boostorg/nowide)
+- [portable-file-diagogs](https://github.com/samhocevar/portable-file-dialogs)
+
+## Compilando
+
+Para compilar, primeiramente mude o caminho para o arquivo `vcpkg.cmake` para
+onde está na sua instalação do cmake em `CMakeLists.txt`.
+
+Então crie a pasta de build com:
 
 `cmake -B build -S .`
 
-Você pode adicionar `-D CMAKE_BUILD_TYPE=Debug` para criar uma build Debug,
-ou `-D CMAKE_BUILD_TYPE=Release` para uma build Release.
+Você pode adicionar `-DCMAKE_BUILD_TYPE=Debug` para uma build Debug ou
+`-DCMAKE_BUILD_TYPE=Release` pra uma build Release no Linux.
 
-Finalmente, compile com:
+No Linux, compile a aplicação com:
 
 `cmake --build build`
 
-A aplicação estará dentro da pasta build.
+O executável estará dentro da pasta build.
+
+No Windows, abra o arquivo .sln dentro da pasta build com o Visual Studio,
+selecione o tipo de build (Debug ou Release) e compile a solução. A
+aplicação estará dentro da pasta respectiva (Debug ou Release).
+
+## Uso
 
 Usando na linha de comando:
 
