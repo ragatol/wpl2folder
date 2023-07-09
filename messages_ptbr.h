@@ -1,0 +1,15 @@
+#pragma once
+
+#define MSG_SELECT_PLAYLIST "Selecione Playlist, cancele para terminar seleção."
+#define MSG_NO_PLAYLISTS "Adicione pelo menos uma Playlist para continuar.\n"
+#define MSG_SELECT_OUTPUT "Selecione pasta para exportar."
+#define MSG_NO_OUTPUT "Pasta de saída não definida, saindo.\n"
+#define MSG_CANT_CREATE_OUTPUT "Não foi possível criar pasta de saída.\n"
+#define MSG_INVALID_OUTPUT "Pasta de saída não deve ser um arquivo.\n"
+#define MSG_COPYING_MEDIA "Copiando e renomeando arquivos de mídia...\n"
+#define MSG_CONVERTING R"(Convertendo "{}" para "{}".)" "\n"
+#define MSG_NORMALIZING "Normalizando volume...\n"
+#define MSG_NORMALIZING_FILES "Normalizando volume dos arquivos...\n"
+#define MSG_COPYING_MP3 "Exportando arquivos mp3 para pasta de saída...\n"
+#define MSG_CLEANING_TMP "Limpando arquivos temporários...\n"
+#define MSG_DONE "Pronto!\n"

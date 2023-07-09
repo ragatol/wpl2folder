@@ -12,6 +12,13 @@
 // with nowide library
 #include <portable-file-dialogs.h>
 
+// messages
+#ifdef LANG_PTBR
+#include "messages_ptbr.h"
+#else
+#include "messages.h"
+#endif
+
 namespace fs = std::filesystem;
 namespace nw = nowide;
 
@@ -41,9 +48,7 @@ auto make_file_list(std::vector<std::string> const &playlists) -> std::vector<fs
 auto media_convert(fs::path const &source, fs::path const &destination) -> void {
     auto src = source.string();
     auto dst = destination.string();
-    fmt::print(R"(Converting "{}" to "{}".)"
-               "\n",
-               src, dst);
+    fmt::print(MSG_CONVERTING, src, dst);
     std::flush(std::cout);
     auto cmd = fmt::format(R"(ffmpeg -v 0 -i "{}" "{}")", src, dst);
     nw::system(cmd.c_str());
@@ -52,7 +57,6 @@ auto media_convert(fs::path const &source, fs::path const &destination) -> void 
 auto normalize_volume(fs::path const &source, fs::path const &destination) -> void {
     auto src = source.string();
     auto dst = destination.string();
-    fmt::print("Normalizing volume from files...\n");
     std::flush(std::cout);
     auto cmd = fmt::format(R"(bs1770gain --quiet "{}" -ao "{}")", src, dst);
     nw::system(cmd.c_str());
@@ -66,7 +70,7 @@ auto get_playlists_from_cli(std::span<char *> const &args) -> std::vector<std::s
 auto get_playlists_from_file_dialog() -> std::vector<std::string> {
     std::vector<std::string> list_selection;
     while (true) {
-        auto playlist = pfd::open_file("Select playlist file(s), cancel to finish selection.", ".", {"Playlist", "*.wpl"}).result();
+        auto playlist = pfd::open_file(MSG_SELECT_PLAYLIST, ".", {"Playlist", "*.wpl"}).result();
         if (playlist.empty()) {
             break;
         }
@@ -88,7 +92,7 @@ auto main(int argc, char *argv[]) -> int {
         playlists = get_playlists_from_file_dialog();
     }
     if (playlists.empty()) {
-        nw::cout << "Add at least one playlist file to continue.\n";
+        nw::cout << MSG_NO_PLAYLISTS;
         return 1;
     }
     auto mediafiles = make_file_list(playlists);
@@ -99,9 +103,9 @@ auto main(int argc, char *argv[]) -> int {
         outdir = *(std::end(args) - 1);
     }
     else {
-        auto dir_selection = pfd::select_folder("Select output directory.", "./out").result();
+        auto dir_selection = pfd::select_folder(MSG_SELECT_OUTPUT, "./out").result();
         if (dir_selection.empty()) {
-            nw::cout << "Output directory not defined, exiting.\n";
+            nw::cout << MSG_NO_OUTPUT;
             return 1;
         }
         outdir = dir_selection;
@@ -109,13 +113,13 @@ auto main(int argc, char *argv[]) -> int {
     fs::path output_path(outdir);
     if (!fs::exists(output_path)) {
         if (!fs::create_directory(output_path)) {
-            nw::cout << "Couldn't create output directory.\n";
+            nw::cout << MSG_CANT_CREATE_OUTPUT;
             return 1;
         }
     }
     else {
         if (!fs::is_directory(output_path)) {
-            nw::cout << "Output path should not be a file.\n";
+            nw::cout << MSG_INVALID_OUTPUT;
             return 1;
         }
     }
@@ -125,18 +129,18 @@ auto main(int argc, char *argv[]) -> int {
         fs::remove_all(temp_dir);
     }
     fs::create_directory(temp_dir);
-    nw::cout << "Copying and renaming playlist media files...\n";
+    nw::cout << MSG_COPYING_MEDIA;
     for (std::size_t i = 1; auto const &src : mediafiles) {
         fs::path dest(fmt::format("{:03} - {}", i, src.filename().string()));
         fs::copy_file(src, temp_dir / dest);
         i++;
     }
 
-    nw::cout << "Normalizing volume...\n";
+    nw::cout << MSG_NORMALIZING;
     auto processed_dir = temp_dir / fs::path("processed");
     normalize_volume(temp_dir, processed_dir);
 
-    nw::cout << "Writing mp3 files into the output directory...\n";
+    nw::cout << MSG_COPYING_MP3;
     for (auto const &file : fs::directory_iterator(processed_dir)) {
         if (!file.is_regular_file()) {
             continue;
@@ -146,8 +150,8 @@ auto main(int argc, char *argv[]) -> int {
         media_convert(file, dest);
     }
 
-    nw::cout << "Cleaning-up temporary files...\n";
+    nw::cout << MSG_CLEANING_TMP;
     fs::remove_all(temp_dir);
 
-    nw::cout << "All done!\n";
+    nw::cout << MSG_DONE;
 }
