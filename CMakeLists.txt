@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.26)
 
 project(wpl2folder VERSION 0.1
 	DESCRIPTION "Creates a folder with all music from many Windows Media Player playlists files, with volume normalized and converted to .mp3"
