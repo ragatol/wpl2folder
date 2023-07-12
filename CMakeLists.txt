@@ -16,12 +16,8 @@ find_path(PORTABLE_FILE_DIALOGS_INCLUDE_DIRS "portable-file-dialogs.h")
 # Export compile_commands for clangd
 set(CMAKE_EXPORT_COMPILE_COMMANDS True)
 
-
 # Configure target
 add_executable(wpl2folder main.cpp)
-
-# sets NDEBUG macro if CMAKE_BUILD_TYPE is set to Debug (for assert and others)
-target_compile_definitions(wpl2folder PRIVATE $<$<CONFIG:Debug>:NDEBUG>)
 
 # add -DLANG_PTBR=1 to build the brazilian portuguese version
 if(DEFINED LANG_PTBR)
