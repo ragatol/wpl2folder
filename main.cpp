@@ -80,7 +80,7 @@ auto get_playlists_from_file_dialog() -> std::vector<std::string> {
 }
 
 auto main(int argc, char *argv[]) -> int {
-    nw::args a(argc, argv); // changes argv to utf8 on windows
+    nw::args args_to_utf8(argc, argv);
     const auto args = std::span(argv, argc);
 
     // get playlist files in order
@@ -130,10 +130,10 @@ auto main(int argc, char *argv[]) -> int {
     }
     fs::create_directory(temp_dir);
     nw::cout << MSG_COPYING_MEDIA;
-    for (std::size_t i = 1; auto const &src : mediafiles) {
-        fs::path dest(fmt::format("{:03} - {}", i, src.filename().string()));
+    for (std::size_t num = 1; auto const &src : mediafiles) {
+        fs::path dest(fmt::format("{:03} - {}", num, src.filename().string()));
         fs::copy_file(src, temp_dir / dest);
-        i++;
+        num++;
     }
 
     nw::cout << MSG_NORMALIZING;
