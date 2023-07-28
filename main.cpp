@@ -1,5 +1,5 @@
 #include <filesystem>
-#include <fmt/core.h>
+#include <format>
 #include <nowide/args.hpp>
 #include <nowide/cstdlib.hpp>
 #include <nowide/fstream.hpp>
@@ -48,9 +48,9 @@ auto make_file_list(std::vector<std::string> const &playlists) -> std::vector<fs
 auto media_convert(fs::path const &source, fs::path const &destination) -> void {
     auto src = source.string();
     auto dst = destination.string();
-    fmt::print(MSG_CONVERTING, src, dst);
+	std::cout << std::format(MSG_CONVERTING, src, dst);
     std::flush(std::cout);
-    auto cmd = fmt::format(R"(ffmpeg -v 0 -i "{}" "{}")", src, dst);
+    auto cmd = std::format(R"(ffmpeg -v 0 -i "{}" "{}")", src, dst);
     nw::system(cmd.c_str());
 }
 
@@ -58,7 +58,7 @@ auto normalize_volume(fs::path const &source, fs::path const &destination) -> vo
     auto src = source.string();
     auto dst = destination.string();
     std::flush(std::cout);
-    auto cmd = fmt::format(R"(bs1770gain --quiet "{}" -ao "{}")", src, dst);
+    auto cmd = std::format(R"(bs1770gain --quiet "{}" -ao "{}")", src, dst);
     nw::system(cmd.c_str());
 }
 
@@ -131,7 +131,7 @@ auto main(int argc, char *argv[]) -> int {
     fs::create_directory(temp_dir);
     nw::cout << MSG_COPYING_MEDIA;
     for (std::size_t num = 1; auto const &src : mediafiles) {
-        fs::path dest(fmt::format("{:03} - {}", num, src.filename().string()));
+        fs::path dest(std::format("{:03} - {}", num, src.filename().string()));
         fs::copy_file(src, temp_dir / dest);
         num++;
     }

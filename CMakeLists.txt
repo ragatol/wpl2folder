@@ -17,7 +17,6 @@ else()
 endif()
 
 # Configure paths for the required libraries
-find_package(fmt CONFIG REQUIRED)
 find_package(nowide CONFIG REQUIRED)
 find_path(PORTABLE_FILE_DIALOGS_INCLUDE_DIRS "portable-file-dialogs.h")
 
@@ -33,6 +32,5 @@ if(DEFINED LANG_PTBR)
 endif()
 
 # link required libraries
-target_link_libraries(wpl2folder PRIVATE fmt::fmt)
 target_link_libraries(wpl2folder PRIVATE nowide::nowide)
 target_include_directories(wpl2folder PRIVATE ${PORTABLE_FILE_DIALOGS_INCLUDE_DIRS})

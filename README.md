@@ -20,13 +20,13 @@ Applications installed and found via PATH environment variable:
 - bs1770gain
 - cmake 3.12+
 - vcpkg
+- C++ compiler with C++20 and std::format support
 
 A vcpkg.json file is included and used with vcpkg configured in CMakeLists.txt
 so libraries dependencies are installed before building.
 
 Libraries used:
 
-- [fmt](https://github.com/fmtlib/fmt)
 - [nowide](https://github.com/boostorg/nowide)
 - [portable-file-diagogs](https://github.com/samhocevar/portable-file-dialogs)
 
@@ -93,13 +93,13 @@ Aplicativos instalados e encontrados via variável de ambiente PATH:
 - bs1770gain
 - cmake 3.12+
 - vcpkg
+- compilador que suporta C++20 e std::format
 
 Um arquivo vcpkg.json está incluso para instalar as bibliotecas necessárias
 antes da compilação.
 
 Libraries used:
 
-- [fmt](https://github.com/fmtlib/fmt)
 - [nowide](https://github.com/boostorg/nowide)
 - [portable-file-diagogs](https://github.com/samhocevar/portable-file-dialogs)
 

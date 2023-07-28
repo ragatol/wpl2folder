@@ -1,6 +1,5 @@
 {
 	"dependencies": [
-		"fmt",
 		"portable-file-dialogs",
 		"nowide"
 	]
